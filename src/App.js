@@ -1,17 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Yael's Wonderland. Nikita Silvestrov is the best....</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <p>Update your package.json libraries!</p>
+      <pre>
+        <code>
+          Paste your <b>package.json</b> below and click update to 🌟
+          &nbsp;auto-magically&nbsp; 🌟 update your <b>package.json</b>{" "}
+          libraries to their latest version.
+        </code>
+      </pre>
+      <p>
+        created by <a href="http://yael.codes">yael.co</a>
+      </p>
+      <pre>
+        <code>
+          <br />
+          <textarea
+            className="code-editor"
+            id="w3review"
+            name="w3review"
+            rows="29"
+            cols="100"
+          >
+            This application is currently under construction. Please standby
+            while I bleep bloop this into existence.
+          </textarea>
+          <br />
+          <br />
+          <button>Update</button>
+          <br />
+        </code>
+      </pre>
+      <p>*classical music plays in the background*</p>
+    </div>
   );
 }
 
