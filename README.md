@@ -2,6 +2,8 @@
 
 A web tool that takes a package.json and updates all the dependency versions to their latest!
 
+https://yaelsprikut.github.io/update-versions/
+
 ## Available Scripts
 
 In the project directory, you can run:
