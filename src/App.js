@@ -2,40 +2,43 @@ import React from "react";
 
 import "./App.css";
 import { useForm } from "react-hook-form";
-import {
-  getLatestVersion,
-  transformDependencies,
-  transformDevDependencies,
-  returnLatestVersion,
-} from "./transform.js";
-
-let renderCount = 0;
+const { getLatestVersion } = require("./transform.js");
 
 function App() {
-  const { register, handleSubmit } = useForm();
-  renderCount++;
-
+  const { register, handleSubmit, setValue } = useForm();
+  // const [inputText, setInputText] = useState("This application is currently under construction. Please standby while I bleep bloop this into existence.");
   // parse JSON and return updated package.json (open raw in new tab)
-  const handleSubmitInput = (input) => {
-    console.log("Handle me and return true or false!");
-  };
+  // const handleSubmitInput = (input) => {
+  //   console.log("Handle me and return true or false!");
+  // };
 
   // if invalid package.json or other error
-  const showMessageError = () => {};
+  // const showMessageError = () => {};
 
   // if package.json was updated successfully
-  const showMessageSuccess = () => {};
+  // const showMessageSuccess = () => {};
 
   const onSubmit = (data) => {
-    const { dependencies } = JSON.parse(data.w3review);
-    console.log("Dependencies: ", dependencies);
-    console.log(
-      "DEV Dependencies: ",
-      JSON.parse(data.w3review).devDependencies
-    );
-    getLatestVersion({ package_name: "fs" });
-  };
+    const { dependencies, devDependencies } = JSON.parse(data.w3review);
+    const updatedJson = getLatestVersion({
+      devDependencies,
+      dependencies,
+    });
 
+    const inputFieldJson = JSON.parse(data.w3review);
+
+    delete inputFieldJson.dependencies;
+    delete inputFieldJson.devDependencies;
+
+    const myPromise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(updatedJson);
+      }, 1000);
+    });
+    myPromise.then((value) => {
+      setValue("w3review", JSON.stringify(value, null, 4));
+    });
+  };
   return (
     <div className="App">
       <p>Update your package.json libraries!</p>
@@ -61,14 +64,12 @@ function App() {
               cols="100"
               ref={register}
             >
-              This application is currently under construction. Please standby
-              while I bleep bloop this into existence.
+              Paste your package.json to get the latest npm packages!
             </textarea>
             <br />
             <br />
             <button type="submit">Update</button>
             <br />
-            <p>Render counter: {renderCount}</p>
           </form>
         </code>
       </pre>
